@@ -1,0 +1,34 @@
+package guiModel;
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public class MyDisplay extends PApplet {
+	
+	//private String URL = "http://cseweb.ucsd.edu/~minnes/palmTrees.jpg";
+	//private PImage backgroundImg;
+	
+	public void setup()
+	{
+		// size of the screen (width x height)
+		size(400, 400);
+		
+		// Values: red, green, blue
+		background(	200	, 200, 200);
+		
+	}
+	
+	public void draw()
+	{
+		fill(255,255,0);
+		ellipse(200, 200, 390, 390);
+		
+		fill(0,0,0);
+		ellipse(120, 130, 50, 70);
+		ellipse(280, 130, 50, 70);
+		
+		noFill();
+		arc(200,300,150,75,-HALF_PI,PI);
+
+		
+	}
+}
