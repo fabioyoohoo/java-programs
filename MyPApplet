@@ -1,0 +1,47 @@
+package module3;
+import processing.core.*;
+
+public class MyPApplet extends PApplet {
+	private String URL = "http://cseweb.ucsd.edu/~minnes/palmTrees.jpg";
+	private PImage backgroundImg;
+	float yPos = 0;
+	
+	public void setup() {
+		size(400,400);			// set canvas size
+		background(255);		// set canvas color
+		stroke(0);				// set pen color
+		
+		backgroundImg = loadImage(URL,"jpg"); 	// image from URL
+		backgroundImg.resize(0,height); 	// resize image to full height of canvas
+		image(backgroundImg, 0, 0);		// display image
+		
+		// frameRate(30);	// refreshes per second
+	}
+	
+	public void draw() {
+		// Add drawing code for MyPApplet
+		
+		int[] color = sunColorSec(second()); 	// calculates the color code for sun
+		
+		// sun placement
+		fill(color[0], color[1], color[2]);   // sets fill of sun
+		ellipse(width/4, height/5, width/5, height/5);  // sets size of sun
+	}
+	
+	public int[] sunColorSec(float seconds)
+	{
+		int[] rgb = new int[3];     // establish a int array of size 3
+    
+		// Scale the brightness of the yellow based on the seconds. 30 seconds      
+		// is black. 	0 seconds is bright yellow.
+		float diffFrom30 = Math.abs(30-seconds);   // obtains distance from 30 seconds
+		
+		float ratio = diffFrom30/30;
+		rgb[0] = (int)(255*ratio);	// red color value
+		rgb[1] = (int)(255*ratio);	// green color value
+		rgb[2] = 0;					// blue color value (fixed at 0)
+		
+		// System.out.println("R " + rgb[0] + " G " + rgb[1] + " B " + rgb[2]);
+		return rgb;
+	}
+}
