@@ -48,9 +48,19 @@ public class EarthquakeCityMap extends PApplet {
 	private UnfoldingMap map;
 	
 	//feed with magnitude 2.5+ Earthquakes
-	private String earthquakesURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.atom";
-	
-	// http://earthquake.usgs.gov/earthquakes/feed/v1.0/atom.php
+	private String earthquakesURL = 
+			
+				// past hour
+			//"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.atom";
+			
+				// updated: day
+			//"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.atom";
+			
+				// week
+			"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+
+				// month		
+			//"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.atom";
 	
 	public void setup() {
 		size(950, 600, OPENGL);
