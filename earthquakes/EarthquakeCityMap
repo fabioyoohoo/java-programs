@@ -47,19 +47,19 @@ public class EarthquakeCityMap extends PApplet {
 	// The map
 	private UnfoldingMap map;
 	
-	//feed with magnitude 2.5+ Earthquakes
+	//feeds for different earthquake data
 	private String earthquakesURL = 
 			
 				// past hour
 			//"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.atom";
 			
-				// updated: day
+				// past day
 			//"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.atom";
 			
-				// week
+				// past 7 days
 			"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
 
-				// month		
+				// past 30 days		
 			//"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.atom";
 	
 	public void setup() {
@@ -89,12 +89,11 @@ public class EarthquakeCityMap extends PApplet {
 	    // to create a new SimplePointMarker for each PointFeature in 
 	    // earthquakes.  Then add each new SimplePointMarker to the 
 	    // List markers (so that it will be added to the map in the line below)
-	    if (earthquakes.size() > 0) {
-	    	for (int f = 0; f < earthquakes.size(); f++) {
-	    		SimplePointMarker pm = createMarker(earthquakes.get(f));
-	    		markers.add(pm);
+	    
+	    for (int f = 0; f < earthquakes.size(); f++) {
+	    	SimplePointMarker pm = createMarker(earthquakes.get(f));
+	    	markers.add(pm);
 	    	}
-	    }
 	    
 	    // Add the markers to the map so that they are displayed
 	    map.addMarkers(markers);
@@ -121,6 +120,7 @@ public class EarthquakeCityMap extends PApplet {
 		
 		Object magObj = feature.getProperty("magnitude");
 		float mag = Float.parseFloat(magObj.toString());
+		float size = (mag*mag)/2;
 		
 		// Here is an example of how to use Processing's color method to generate 
 	    // an int that represents the color yellow.  
@@ -139,18 +139,18 @@ public class EarthquakeCityMap extends PApplet {
 	    if (mag < THRESHOLD_LIGHT) {
 	    	marker.setColor(blue);
 	    	marker.setStrokeColor(blue);
-	    	marker.setRadius(5);
+	    	marker.setRadius(size);
 	    }
 	    
 	    if (mag >= THRESHOLD_LIGHT && mag < THRESHOLD_MODERATE) {
 	    		marker.setColor(yellow);
 	    		//marker.setStrokeColor(yellow);
-	    		marker.setRadius(10);
+	    		marker.setRadius(size);
 	    }
 	    if (mag >= THRESHOLD_MODERATE) {
 	    		marker.setColor(red);
 	    		//marker.setStrokeColor(red);
-	    		marker.setRadius(15);
+	    		marker.setRadius(size);
 	    }
 	    
 	    // Finally return the marker
@@ -169,24 +169,25 @@ public class EarthquakeCityMap extends PApplet {
 	private void addKey() 
 	{	
 		// Remember you can use Processing's graphics methods here
+		
 		noFill();
 		rect(20,50,160,300);
 		
-		noFill();
+		fill(50, 53, 51);
+		textSize(14);
 		text("Legend", 65, 65);
-		
-		noFill();
+		textSize(12);
 		text("5.0+ Magnitude", 75, 110);
+		text("4.0+ Magnitude", 75, 160);
+		text("Below 4.0", 75, 210);
+		
+		
 		fill(255,0,0);
 		ellipse(55,103,15,15);
 		
-		noFill();
-		text("4.0+ Magnitude", 75, 160);
 		fill(255,255,0);
 		ellipse(55,157,10,10);
 		
-		noFill();
-		text("Below 4.0", 75, 210);
 		fill(0,0,255);
 		ellipse(55,208,5,5);
 		
